@@ -3,57 +3,63 @@ package stack
 import "testing"
 
 func TestStackNew(t *testing.T) {
-	stack := New[int]()
-
-	for range stack.values {
-		t.Errorf("expect empty slice")
-	}
-	if stack.len != 0 {
-		t.Errorf("expect slice of zero length, got %d", stack.len)
-	}
-	if stack.cap != 0 {
-		t.Errorf("expect slice of zero capacity, got %d", stack.cap)
-	}
-
+	var stack Stack[int]
 	const MAXLEN = 5
 	const MAXCAP = 10
 
-	stack = New[int](MAXCAP)
-	if len_ := len(stack.values); len_ != MAXCAP {
-		t.Errorf("expect slice of length %d, got %d", MAXCAP, len_)
-	}
-	if cap_ := cap(stack.values); cap_ != MAXCAP {
-		t.Errorf("expect stack of capacity %d, got %d", MAXCAP, cap_)
-	}
-	for i, value := range stack.values {
-		if value != 0 {
-			t.Errorf("expect zero at position %d, got %v", i, value)
+	{
+		stack = New[int]()
+		for range stack.values {
+			t.Errorf("expect empty slice")
 		}
-	}
-	if stack.len != MAXCAP {
-		t.Errorf("expect stack of length %d, got %d", MAXCAP, stack.len)
-	}
-	if stack.cap != MAXCAP {
-		t.Errorf("expect stack of capacity %d, got %d", MAXCAP, stack.len)
+		if stack.len != 0 {
+			t.Errorf("expect slice of zero length, got %d", stack.len)
+		}
+		if stack.cap != 0 {
+			t.Errorf("expect slice of zero capacity, got %d", stack.cap)
+		}
 	}
 
-	stack = New[int](MAXLEN, MAXCAP)
-	if len_ := len(stack.values); len_ != MAXLEN {
-		t.Errorf("expect slice of length %d, got %d", MAXLEN, len_)
-	}
-	if cap_ := cap(stack.values); cap_ != MAXCAP {
-		t.Errorf("expect stack of capacity %d, got %d", MAXCAP, cap_)
-	}
-	for i, value := range stack.values {
-		if value != 0 {
-			t.Errorf("expect zero at position %d, got %v", i, value)
+	{
+		stack = New[int](MAXCAP)
+		if len_ := len(stack.values); len_ != MAXCAP {
+			t.Errorf("expect slice of length %d, got %d", MAXCAP, len_)
+		}
+		if cap_ := cap(stack.values); cap_ != MAXCAP {
+			t.Errorf("expect stack of capacity %d, got %d", MAXCAP, cap_)
+		}
+		for i, value := range stack.values {
+			if value != 0 {
+				t.Errorf("expect zero at position %d, got %v", i, value)
+			}
+		}
+		if stack.len != MAXCAP {
+			t.Errorf("expect stack of length %d, got %d", MAXCAP, stack.len)
+		}
+		if stack.cap != MAXCAP {
+			t.Errorf("expect stack of capacity %d, got %d", MAXCAP, stack.len)
 		}
 	}
-	if len_ := stack.len; len_ != MAXLEN {
-		t.Errorf("expect stack of length %d, got %d", MAXLEN, len_)
-	}
-	if cap_ := stack.cap; cap_ != MAXCAP {
-		t.Errorf("expect stack of capacity %d, got %d", MAXCAP, cap_)
+
+	{
+		stack = New[int](MAXLEN, MAXCAP)
+		if len_ := len(stack.values); len_ != MAXLEN {
+			t.Errorf("expect slice of length %d, got %d", MAXLEN, len_)
+		}
+		if cap_ := cap(stack.values); cap_ != MAXCAP {
+			t.Errorf("expect stack of capacity %d, got %d", MAXCAP, cap_)
+		}
+		for i, value := range stack.values {
+			if value != 0 {
+				t.Errorf("expect zero at position %d, got %v", i, value)
+			}
+		}
+		if len_ := stack.len; len_ != MAXLEN {
+			t.Errorf("expect stack of length %d, got %d", MAXLEN, len_)
+		}
+		if cap_ := stack.cap; cap_ != MAXCAP {
+			t.Errorf("expect stack of capacity %d, got %d", MAXCAP, cap_)
+		}
 	}
 }
 
@@ -100,6 +106,7 @@ func TestStackCap(t *testing.T) {
 
 func TestStackPush(t *testing.T) {
 	stack := New[int]()
+
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(-3)
