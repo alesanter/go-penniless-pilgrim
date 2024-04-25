@@ -29,14 +29,14 @@ func (set Set[T]) Empty() bool {
 }
 
 // Returns `true` if the map didn't contain the added element, otherwise `false`.
-func (set *Set[T]) Add(value T) (ok bool) {
+func (set Set[T]) Add(value T) (ok bool) {
 	_, ok = set.values[value]
 	set.values[value] = true
 	return !ok
 }
 
 // Returns `false` if the map didn't contain the element, otherwise `true`.
-func (set *Set[T]) Remove(value T) (ok bool) {
+func (set Set[T]) Remove(value T) (ok bool) {
 	_, ok = set.values[value]
 	delete(set.values, value)
 	return ok
