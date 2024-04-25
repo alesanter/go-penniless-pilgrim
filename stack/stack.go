@@ -7,24 +7,22 @@ type Stack[T any] struct {
 }
 
 func New[T any](size ...int) Stack[T] {
-	var len_, cap_ = 0, 0
-
+	var values []T
 	switch len(size) {
 	case 0:
+		values = make([]T, 0)
 	case 1:
-		len_ = size[0]
-		cap_ = len_
+		values = make([]T, size[0])
 	case 2:
-		len_ = size[0]
-		cap_ = size[1]
+		values = make([]T, size[0])
 	default:
 		panic(size)
 	}
 
 	return Stack[T]{
-		values: make([]T, len_, cap_),
-		len:    len_,
-		cap:    cap_,
+		values: values,
+		len:    len(values),
+		cap:    cap(values),
 	}
 }
 
