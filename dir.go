@@ -23,3 +23,18 @@ func (dir Dir) String() string {
 		panic(dir) // unreachable
 	}
 }
+
+func (dir Dir) Opposite() Dir {
+	switch dir {
+	case DIR_RIGHT:
+		return DIR_LEFT
+	case DIR_LEFT:
+		return DIR_RIGHT
+	case DIR_UP:
+		return DIR_DOWN
+	case DIR_DOWN:
+		return DIR_UP
+	default:
+		panic(dir)
+	}
+}
